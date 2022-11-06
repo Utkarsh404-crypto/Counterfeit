@@ -1,0 +1,48 @@
+#logo {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    width: 21vw;
+    height: 10%;
+    margin: 1rem;
+    background-color: white;
+    border-radius: 5rem;
+    border: 1px solid #000;
+    box-shadow: 3px 3px 13px #000;
+}
+
+#helloTitle {
+    -webkit-animation: glow 1s ease-in-out infinite alternate;
+    -moz-animation: glow 1s ease-in-out infinite alternate;
+    animation: glow 1s ease-in-out infinite alternate;
+}
+
+#welcomebackTitle {
+    -webkit-animation: glow2 1s ease-in-out infinite alternate;
+    -moz-animation: glow2 1s ease-in-out infinite alternate;
+    animation: glow2 1s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+    from {
+        text-shadow: 0 0 8px rgb(0, 221, 255), 0 0 18px rgb(108, 204, 255), 0 0 28px #51e2e5, 0 0 38px #009de6, 0 0 48px #3a91ed, 0 0 58px #00c7e6, 0 0 68px #00e6e6;
+    }
+}
+
+@keyframes glow2 {
+    from {
+        text-shadow: 0 0 2px rgb(19, 8, 173), 0 0 8px rgb(108, 204, 255), 0 0 10px #51e2e5, 0 0 22px #13135d, 0 0 30px #124377, 0 0 40px #00c7e6, 0 0 48px #003b62;
+    }
+}
+
+@media screen and (max-width: 992px) {
+    #logo {
+        display: flex;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        width: 42vw;
+        height: 7%;
+        margin: 1rem;
+        background-color: white;
+    }
+}
