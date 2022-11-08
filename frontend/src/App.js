@@ -6,18 +6,17 @@ import Form from "./components/form/Form";
 
 function App() {
 	return (
-		<BrowserRouter>
-			<Routes>
-				<Route
-					path="/"
-					element={<Form />}
-				/>
-				<Route
-					path="/home"
-					element={<Home />}
-				/>
-			</Routes>
-		</BrowserRouter>
+		<Routes>
+			<Route
+				path="/"
+				element={<Form />}
+			/>
+			<Route
+				exact
+				path="/home"
+				element={<Home />}
+			/>
+		</Routes>
 	);
 }
 

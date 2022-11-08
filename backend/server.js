@@ -5,12 +5,14 @@ const connectDb = require("./config/db");
 const userRoute = require("./routes/userRoute");
 const { notFound, errors } = require("./middleware/error");
 const cors = require("cors");
+const bodyParser = require('body-parser');
 
 dotenv.config();
 connectDb();
 
 app.use(cors());
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.use("/api/user", userRoute);
 

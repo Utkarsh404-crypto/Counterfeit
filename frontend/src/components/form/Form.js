@@ -1,50 +1,36 @@
 import * as Components from "./Components.js";
 import React from "react";
-import { useToast } from "@chakra-ui/react";
 import axios from "axios";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import logo from "./logo.jpg";
 import "./form.css";
-import { AlertTitle } from "@mui/material";
-import { Alert } from "@mui/material";
 
 const Form = () => {
-	const toast = useToast();
-	const [signIn, toggle] = React.useState(true);
+	const [signIn, toggle] = useState(true);
 	const [username, setName] = useState();
 	const [email, setEmail] = useState();
 	const [mobileNo, setMobileNo] = useState();
 	const [password, setPassword] = useState();
 	const [confirmpassword, setConfirmpassword] = useState();
 	const [load, setLoad] = useState(false);
+	const navigate = useNavigate();
 
-	const handleSubmit = async () => {
+	const handleSignUp = async () => {
 		if (!username || !email || !mobileNo || !password || !confirmpassword) {
-			toast({
-				title: "Please fill the details",
-				status: "warning",
-				duration: 3000,
-				isClosable: true
-			});
-
+			alert("Please provide all the credentials");
 			return;
 		}
 
 		if (password !== confirmpassword) {
-			toast({
-				title: "Password do not match",
-				status: "error",
-				duration: 3000,
-				isClosable: true
-			});
+			alert("Password doesn't match");
 			return;
 		}
 
 		try {
 			const config = {
 				headers: {
-					"Content-type": "application/json"
+					"Content-Type": "application/json"
 				}
 			};
 			const { data } = await axios.post(
@@ -54,18 +40,43 @@ const Form = () => {
 			);
 			console.log("hello", data);
 			setLoad(true);
-			toast({
-				title: "Registration Successful",
-				description: "We've created your account for you.",
-				status: "success",
-				duration: 3000,
-				isClosable: true
-			});
+			alert("Registration Successful");
 
 			localStorage.setItem("usersInfo", JSON.stringify(data));
 		} catch (error) {
 			console.log(error.message);
-			alert("error");
+			alert("Something went wrong");
+		}
+	};
+
+	const handleLogin = async () => {
+		setLoad(true);
+		if (!email || !password) {
+			alert("Please fill all the details");
+			setLoad(false);
+			return;
+		}
+		try {
+			const config = {
+				headers: {
+					"Content-Type": "application/json"
+				}
+			};
+
+			const { data } = await axios.post(
+				"http://localhost:8080/api/user/login",
+				{ email, password },
+				config
+			);
+
+			localStorage.setItem("userInfo", JSON.stringify(data));
+			// setUser(JSON.parse(localStorage.getItem("userInfo")));
+			setLoad(false);
+			navigate("/home");
+		} catch (error) {
+			console.log(error.message);
+			alert("Something went wrong");
+			setLoad(false);
 		}
 	};
 
@@ -100,7 +111,7 @@ const Form = () => {
 							placeholder="Confirm Password"
 							onChange={(e) => setConfirmpassword(e.target.value)}
 						/>
-						<Components.Button onClick={handleSubmit}>
+						<Components.Button onClick={handleSignUp}>
 							{" "}
 							Sign Up{" "}
 						</Components.Button>{" "}
@@ -117,16 +128,21 @@ const Form = () => {
 						<Components.Input
 							type="email"
 							placeholder="Email"
+							onChange={(e) => setEmail(e.target.value)}
 						/>
 						<Components.Input
 							type="password"
 							placeholder="Password"
+							onChange={(e) => setPassword(e.target.value)}
 						/>
 						<Components.Anchor href="#">
 							{" "}
 							Forgot your password ?{" "}
 						</Components.Anchor>{" "}
-						<Components.Button> Sign in </Components.Button>{" "}
+						<Components.Button onClick={handleLogin}>
+							{" "}
+							Sign in{" "}
+						</Components.Button>{" "}
 					</Components.Form>{" "}
 				</Components.SignInContainer>
 
