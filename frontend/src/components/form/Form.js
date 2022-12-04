@@ -7,6 +7,7 @@ import logo from "./logo.jpg";
 import "./form.css";
 
 const Form = () => {
+	const navigate = useNavigate();
 	const [signIn, toggle] = useState(true);
 	const [username, setName] = useState();
 	const [email, setEmail] = useState();
@@ -14,7 +15,6 @@ const Form = () => {
 	const [password, setPassword] = useState();
 	const [confirmpassword, setConfirmpassword] = useState();
 	const [load, setLoad] = useState(false);
-	const navigate = useNavigate();
 
 	const handleSignUp = async () => {
 		if (!username || !email || !mobileNo || !password || !confirmpassword) {
@@ -90,51 +90,51 @@ const Form = () => {
 							type="text"
 							placeholder="Name"
 							onChange={(e) => setName(e.target.value)}
-						/>
+						/>{" "}
 						<Components.Input
 							type="email"
 							placeholder="Email"
 							onChange={(e) => setEmail(e.target.value)}
-						/>
+						/>{" "}
 						<Components.Input
 							type="number"
 							placeholder="Mobile No."
 							onChange={(e) => setMobileNo(e.target.value)}
-						/>
+						/>{" "}
 						<Components.Input
 							type="password"
 							placeholder="Password"
 							onChange={(e) => setPassword(e.target.value)}
-						/>
+						/>{" "}
 						<Components.Input
 							type="password"
 							placeholder="Confirm Password"
 							onChange={(e) => setConfirmpassword(e.target.value)}
-						/>
+						/>{" "}
 						<Components.Button onClick={handleSignUp}>
 							{" "}
 							Sign Up{" "}
 						</Components.Button>{" "}
 					</Components.Form>{" "}
-				</Components.SignUpContainer>
-
+				</Components.SignUpContainer>{" "}
 				<Components.SignInContainer signinIn={signIn}>
 					<img
 						id="logo"
+						alt=""
 						src={logo}
-					/>
+					/>{" "}
 					<Components.Form>
 						<Components.Title> Sign in </Components.Title>{" "}
 						<Components.Input
 							type="email"
 							placeholder="Email"
 							onChange={(e) => setEmail(e.target.value)}
-						/>
+						/>{" "}
 						<Components.Input
 							type="password"
 							placeholder="Password"
 							onChange={(e) => setPassword(e.target.value)}
-						/>
+						/>{" "}
 						<Components.Anchor href="#">
 							{" "}
 							Forgot your password ?{" "}
@@ -144,8 +144,7 @@ const Form = () => {
 							Sign in{" "}
 						</Components.Button>{" "}
 					</Components.Form>{" "}
-				</Components.SignInContainer>
-
+				</Components.SignInContainer>{" "}
 				<Components.OverlayContainer signinIn={signIn}>
 					<Components.Overlay signinIn={signIn}>
 						<Components.LeftOverlayPanel signinIn={signIn}>
@@ -159,8 +158,7 @@ const Form = () => {
 							<Components.GhostButton onClick={() => toggle(true)}>
 								Sign In{" "}
 							</Components.GhostButton>{" "}
-						</Components.LeftOverlayPanel>
-
+						</Components.LeftOverlayPanel>{" "}
 						<Components.RightOverlayPanel signinIn={signIn}>
 							<Components.Title id="helloTitle"> Hello! </Components.Title>{" "}
 							<Components.Paragraph>
@@ -169,10 +167,10 @@ const Form = () => {
 							<Components.GhostButton onClick={() => toggle(false)}>
 								Sign Up{" "}
 							</Components.GhostButton>{" "}
-						</Components.RightOverlayPanel>
+						</Components.RightOverlayPanel>{" "}
 					</Components.Overlay>{" "}
-				</Components.OverlayContainer>
-			</Components.Container>
+				</Components.OverlayContainer>{" "}
+			</Components.Container>{" "}
 		</div>
 	);
 };
