@@ -23,15 +23,33 @@
     animation: glow2 1s ease-in-out infinite alternate;
 }
 
+.paragraph {
+    color: rgb(255, 255, 255);
+}
+
+.rightPanelImg {
+    background-image: url(../form/images/illus3.jpg);
+    background-position: center;
+    background-size: 100% 100%;
+    z-index: -1;
+}
+
+.leftPanelImg {
+    background-image: url(../form/images/illus3.jpg);
+    background-position: center;
+    background-size: 100% 100%;
+    z-index: -1;
+}
+
 @keyframes glow {
     from {
-        text-shadow: 0 0 8px rgb(0, 221, 255), 0 0 18px rgb(108, 204, 255), 0 0 28px #51e2e5, 0 0 38px #009de6, 0 0 48px #3a91ed, 0 0 58px #00c7e6, 0 0 68px #00e6e6;
+        text-shadow: 0 0 8px rgb(212, 0, 255), 0 0 18px rgb(208, 108, 255), 0 0 28px #b651e5, 0 0 38px #a803ae, 0 0 48px #590777, 0 0 58px #c700e6, 0 0 68px #e6008e;
     }
 }
 
 @keyframes glow2 {
     from {
-        text-shadow: 0 0 2px rgb(19, 8, 173), 0 0 8px rgb(108, 204, 255), 0 0 10px #51e2e5, 0 0 22px #13135d, 0 0 30px #124377, 0 0 40px #00c7e6, 0 0 48px #003b62;
+        text-shadow: 0 0 2px rgb(54, 10, 50), 0 0 8px rgb(255, 108, 226), 0 0 10px #f986ff, 0 0 22px #ff11db, 0 0 30px #571277, 0 0 40px #e600d3, 0 0 48px #4d0062;
     }
 }
 
@@ -44,5 +62,20 @@
         height: 7%;
         margin: 1rem;
         background-color: white;
+    }
+    .leftPanelImg {
+        background-image: url(../form/images/illus3.jpg);
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 69vw 100%;
+        z-index: -1;
+    }
+    .rightPanelImg {
+        background-image: url(../form/images/illus3.jpg );
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 69vw 100%;
+        z-index: -1;
+        float: left;
     }
 }

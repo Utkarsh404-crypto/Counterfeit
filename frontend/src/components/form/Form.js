@@ -3,7 +3,7 @@ import React from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import logo from "./logo.jpg";
+import logo from "../form/images/logo.jpg";
 import "./form.css";
 
 const Form = () => {
@@ -14,16 +14,18 @@ const Form = () => {
 	const [mobileNo, setMobileNo] = useState();
 	const [password, setPassword] = useState();
 	const [confirmpassword, setConfirmpassword] = useState();
-	const [load, setLoad] = useState(false);
+	const [error, setError] = useState("");
+	const [successMessage, setSuccessMessage] = useState("");
 
-	const handleSignUp = async () => {
+	const handleSignUp = async (e) => {
+		e.preventDefault();
 		if (!username || !email || !mobileNo || !password || !confirmpassword) {
-			alert("Please provide all the credentials");
+			setError("*Please provide all the credentials");
 			return;
 		}
 
 		if (password !== confirmpassword) {
-			alert("Password doesn't match");
+			setError("*Password doesn't match");
 			return;
 		}
 
@@ -38,22 +40,19 @@ const Form = () => {
 				{ username, email, mobileNo, password },
 				config
 			);
-			console.log("hello", data);
-			setLoad(true);
-			alert("Registration Successful");
+			setSuccessMessage("Registration Successful");
+			setError("");
 
 			localStorage.setItem("usersInfo", JSON.stringify(data));
 		} catch (error) {
-			console.log(error.message);
-			alert("Something went wrong");
+			setError("*Something went wrong");
 		}
 	};
 
-	const handleLogin = async () => {
-		setLoad(true);
+	const handleLogin = async (e) => {
+		e.preventDefault();
 		if (!email || !password) {
-			alert("Please fill all the details");
-			setLoad(false);
+			setError("*Please fill all the details");
 			return;
 		}
 		try {
@@ -70,13 +69,10 @@ const Form = () => {
 			);
 
 			localStorage.setItem("userInfo", JSON.stringify(data));
-			// setUser(JSON.parse(localStorage.getItem("userInfo")));
-			setLoad(false);
+
 			navigate("/home");
 		} catch (error) {
-			console.log(error.message);
-			alert("Something went wrong");
-			setLoad(false);
+			setError("*Please provide correct credentials");
 		}
 	};
 
@@ -115,6 +111,10 @@ const Form = () => {
 							{" "}
 							Sign Up{" "}
 						</Components.Button>{" "}
+						{successMessage && (
+							<span style={{ color: "green" }}> {successMessage} </span>
+						)}{" "}
+						{error && <span style={{ color: "red" }}> {error} </span>}{" "}
 					</Components.Form>{" "}
 				</Components.SignUpContainer>{" "}
 				<Components.SignInContainer signinIn={signIn}>
@@ -143,23 +143,28 @@ const Form = () => {
 							{" "}
 							Sign in{" "}
 						</Components.Button>{" "}
+						{error && <span style={{ color: "red" }}> {error} </span>}{" "}
 					</Components.Form>{" "}
 				</Components.SignInContainer>{" "}
 				<Components.OverlayContainer signinIn={signIn}>
 					<Components.Overlay signinIn={signIn}>
-						<Components.LeftOverlayPanel signinIn={signIn}>
+						<Components.LeftOverlayPanel
+							signinIn={signIn}
+							className="leftPanelImg">
 							<Components.Title id="welcomebackTitle">
 								{" "}
 								Welcome Back!{" "}
 							</Components.Title>{" "}
-							<Components.Paragraph>
+							<Components.Paragraph className="paragraph">
 								To keep connected with us please login with your personal info{" "}
 							</Components.Paragraph>{" "}
 							<Components.GhostButton onClick={() => toggle(true)}>
 								Sign In{" "}
 							</Components.GhostButton>{" "}
 						</Components.LeftOverlayPanel>{" "}
-						<Components.RightOverlayPanel signinIn={signIn}>
+						<Components.RightOverlayPanel
+							signinIn={signIn}
+							className="rightPanelImg">
 							<Components.Title id="helloTitle"> Hello! </Components.Title>{" "}
 							<Components.Paragraph>
 								Enter your personal details and start a journey with us{" "}
